@@ -64,7 +64,7 @@ test <- song_words %>%
   arrange(desc(n_songs))
 
 test_wo_remaster <- test %>%
-  filter(!word %in% c("remastered", "remaster", "remasterizado", "feat", "mix", "op", "remix", "ñœ", "ñ", "ð", "ðºð", "ã", "ðµ", "å", "ñƒð"))
+  filter(!word %in% c("remastered", "remaster", "remasterizado", "feat", "mix", "op", "remix", "ñœ", "ñ", "ð", "ðºð", "ã", "ðµ", "å", "ñƒð", "year", "years", "und", "con"))
 ```
 
 ```{r}
@@ -84,7 +84,7 @@ test_2020 <- song_words %>%
   ungroup() %>%
   filter(n_songs > 1) %>%
   arrange(desc(n_songs)) %>%
-  filter(!word %in% c("remastered", "remaster", "remasterizado", "feat", "mix", "op", "remix", "ñœ", "ñ", "ð", "ðºð", "ã", "ðµ", "å", "ñƒð"))
+  filter(!word %in% c("remastered", "remaster", "remasterizado", "feat", "mix", "mixed", "op", "remix", "ñœ", "ñ", "ð", "ðºð", "ã", "ðµ", "å", "ñƒð", "year", "years"))
 ```
 
 ```{r}
@@ -164,6 +164,48 @@ data_w_genres %>%
   geom_point(alpha = 0.2, size = 3)
 
 cor(data_w_genres$count, data_w_genres$popularity)
+```
+
+```{r}
+data_prc %>%
+  filter(artists=="['The Beatles']") %>%
+  group_by(year) %>%
+  summarise(mean_popularity = mean(popularity),
+            total_popularity = sum(popularity),
+            n_songs = n()) %>%
+  ungroup() %>%
+  ggplot(aes(x = year)) +
+  geom_line(aes(y = mean_popularity), color = "blue") +
+  geom_line(aes(y = n_songs), color = "green") +
+  scale_x_continuous(breaks = seq(1910, 2020, 10))
+```
+
+```{r}
+data_prc %>%
+  filter(artists=="['Queen']") %>%
+  group_by(year) %>%
+  summarise(mean_popularity = mean(popularity),
+            total_popularity = sum(popularity)) %>%
+  ungroup() %>%
+  ggplot(aes(x = year, y = mean_popularity)) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(breaks = seq(1910, 2020, 10))
+```
+
+```{r}
+
+data_prc %>%
+  filter(artists=="['Coldplay']") %>%
+  group_by(year) %>%
+  summarise(mean_popularity = mean(popularity),
+            total_popularity = sum(popularity)) %>%
+  ungroup() %>%
+  ggplot(aes(x = year, y = mean_popularity, label = year)) +
+  geom_line() +
+  geom_point() +
+  geom_text() +
+  scale_x_continuous(breaks = seq(1910, 2020, 10))
 ```
 
 
