@@ -29,7 +29,7 @@ data <- data %>%
   select(id, name, artists, year, release_date, everything())
 ```
 
-The catchphrase **Data is the new currency** has become quite prevalent in our day to day conversations and news feed. As per the [statista reoprt]([https://www.statista.com/statistics/871513/worldwide-data-created/) released in May 2020, this year is expected to consume 74 zettabytes (1 zettabyte = trillion gigabytes) of data worldwide. This number is projected to almost double by 2024. 
+The catchphrase **Data is the new currency** has become quite prevalent in our day to day conversations and news feed. As per the [statista report]([https://www.statista.com/statistics/871513/worldwide-data-created/) released in May 2020, this year is expected to consume 74 zettabytes (1 zettabyte = trillion gigabytes) of data worldwide. This number is projected to almost double by 2024. 
 
 ```{r , echo=FALSE, fig.cap="Statista report on data creation/consumption", out.width = '100%'}
 knitr::include_graphics("./imgs/statista-data-consumption.JPG")
@@ -39,9 +39,9 @@ Through groundbreaking inventions in data storage systems, we can find data on a
 
 Having said that, analyzing data requires understanding the definition of data attributes, the quality of the data, and methodical analysis to not derive incorrect conclusions. Moreover, to avoid getting stuck in the state of _analysis paralysis_, we should have a sense of the questions we would like to answer through the analysis. 
 
-Exploratory data analysis (EDA) is primarily used to enable stakeholders take data driven decisions and to understand the interplays of various data attributes that help develop and validate better prediction models.
+Exploratory data analysis (EDA) is an approach in data science to derive insights from the given data while understanding the structure, anomalies, and interplays of various data attributes. The insights from EDA can be further distilled to enable stakeholders take data driven decisions and to develop and validate better prediction models.
 
-In this article I would be using EDA to learn about world music using data from a global audio streaming service - Spotify.
+As an avid listener of Indian classical and pop music, I attempt to expand my musical taste buds through EDA on world music data in this article. I will be using data from Spotify - a major audio streaming service. 
 
 Some of the questions of interest are:
 
@@ -53,7 +53,7 @@ Let's first get an overview of Spotify data and assess the quality of the same.
 
 # Overview of Spotify data
 
-I have obtained all Spotify tracks ranging from 1920 to 2020 (100 years!) from a [Kaggle dataset](https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks).  Each row ideally represents a track, with a Spotify track id, artist's name, track's name, and a bunch of audio features associated with the track. A sample of the data from year 2020 is shown below.
+I have obtained all Spotify tracks released between 1920 to 2020 (100 years!) from a [Kaggle dataset](https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks).  Each row ideally represents a track, with a Spotify track id, artist's name, track's name, and a bunch of audio features associated with the track. A sample of the data from year 2020 is shown below.
 
 
 ```{r}
@@ -111,6 +111,7 @@ datatable(
   )
 ```
 
+### Data definitions
 
 There are a couple of issues with this data that make it inconsistent with the ideal state i.e. one record per track. There are some records where all the fields are duplicated, multiple times. In addition to that, few tracks appear multiple times with the same track name and artist with different track id. This happens because a track can be added to Spotify as a single entry and/or as a part of an album with separate ids for each addition. The same track can also be added multiple times with different release dates under different licenses in different markets. We need to overcome this issue in the data to not double count the statistics which could result in misleading conclusions.
 
@@ -159,7 +160,7 @@ Now, we have a fair understanding of the data and have processed it appropriatel
 
 ## Tracks and artists over years on Spotify
 
-The number of tracks released fluctuates a lot between 1920 and 1950, probably because of the limited capacity for production. Since 1950, around 2,000 tracks were released consistently until 1999. The number dropped by almost a half in 2000-2001 and is steadily increasing since 2004.  Interestingly, the number of tracks shot up by 1.5 in 2020. I am reigning my temptation to associate reasons with the high-level fluctuations in the number of tracks over years since Spotify is not the exclusive platform to host all the music that gets created around the globe. However, the trends are certainly intriguing and demand further investigation.   
+The number of tracks released fluctuates a lot between 1920 and 1950, probably because of the limited capacity for production. Since 1950, around 2,000 tracks were released consistently until 1999. The number dropped by almost a half in 2000-2001 and is steadily increasing since 2004.  Interestingly, the number of tracks shot up by 1.5 in 2020. I am reining my temptation to associate reasons with the high-level fluctuations in the number of tracks over years since Spotify is not the exclusive platform to host all the music that gets created around the globe. However, the trends are certainly intriguing and demand further investigation.   
 
 The number of unique artists who released tracks by years has an increasing trend across all years, including the years when the number of tracks were stable around 2,000. This suggests increased accessibility for even novice artists to publish their songs on Spotify.      
 
@@ -282,20 +283,6 @@ ggplotly(
 )
 #ggsave("./imgs/explicit_trend.png")
 ```
-
-<!-- # key -->
-
-<!-- ```{r} -->
-
-<!-- data_prc %>% -->
-<!--   count(year, key_group) %>% -->
-<!--   group_by(year) %>% -->
-<!--   mutate(perc = n/sum(n)) %>% -->
-<!--   ggplot(aes(x = year, y = perc, fill = key_group)) + -->
-<!--   geom_col() + -->
-<!--   scale_fill_brewer(palette = "Paired") + -->
-<!--   scale_x_continuous(breaks = seq(1910, 2020, 10)) -->
-<!-- ``` -->
 
 ### Duration of tracks
 
@@ -447,9 +434,9 @@ grid.arrange(p_acoustic, p_energy, p_energy_loudness, p_valence_dance, nrow = 2)
 
 # Top 20 most productive artists
 
-After visualizing trends and correlation of audio features, let's find out which artists have been the most productive on Spotify 100 years. 
+After visualizing trends and correlation of audio features, let's find out which artists have been the most productive on Spotify over 100 years. 
 
-The chart below shows top 20 artists that have the most number of tracks on Spotify. The shading represents time between release of their first track and last track. Top 4 most productive artists by a bigger margin have been active for < 30 years between 1920 to 1950. **Tadeusz Dolega Mostowicz** is actually a Polish writer and have his books posted in chapters on Spotify. Higher number of active years may have some correlation with popularity as they could consistently release tracks over many years and their tracks get played more at all times. **Ella Fitzgerald** is one of the early artists (from 1920s) whose last track was added in 1999 yet ranks pretty high on the popularity spectrum (73). Quite incredible! **Frank Sinatra** has been active for most number of years (80 years) among the top 20 artists. 
+The chart below shows top 20 artists that have the highest number of tracks on Spotify. The shading represents time between release of their first track and last track. Top 4 most productive artists by a bigger margin have been active for < 30 years between 1920 to 1950. **Tadeusz Dolega Mostowicz** is actually a Polish writer and have his books posted in chapters on Spotify. Higher number of active years may have some correlation with popularity as they could consistently release tracks over many years and their tracks get played more at all times. **Ella Fitzgerald** is one of the early artists (from 1920s) whose last track was added in 1999 yet ranks pretty high on the popularity spectrum (73). Quite incredible! **Frank Sinatra** has been active for most number of years (80 years) among the top 20 artists. 
 
 As a devout lover of old Indian songs, I was delighted to see a highly revered Indian artist - **Lata Mangeshkar** - right between **The Beatles** and **Queeen**. 
 
@@ -561,7 +548,7 @@ ggplotly(scales_data_prc %>%
 #ggsave("./imgs/coldplay.png")
 ```
 
-One question that came to mind while exploring the data is what can the most commonly used words across all tracks tell us about the core inspiration of music. 
+One question that came to mind while exploring the data is what the most commonly used words across all tracks can tell us about the core inspiration of music. 
 
 # Common words in track names
 
@@ -580,9 +567,8 @@ It is quite interesting to observe words related to **work out** to be more comm
 knitr::include_graphics("./imgs/word-cloud-100-2020.JPG")
 ```
 
+My purpose to understand music and artists from other genres got fairly satisfied through this EDA. I hope you had some of your musical and analytical curiosity satisfied as well through this article. I am certainly going to listen to tracks from all 20 most productive artists, especially **Ella Fitzgerald** and the most popular tracks ever recorded on Spotify **positions** and **Mood (feat. iann dior)**.  I am also guilty of dancing on the most _danceable_ song - **Funky Cold Medina** by _Tone-Loc_ while writing this article.
 
-I Hope you had some of your musical and analytical curiosity satisfied through this blog. The data and code is freely available [here](https://github.com/alabeli/spotify-eda). Poke around to find answers to your questions around this data. 
-
-As an avid listener of Indian classical and pop music, I got a good introduction to music and artists from other genres. I am certainly going to listen to tracks from all 20 most productive artists, especially **Ella Fitzgerald** and the most popular tracks ever recorded on Spotify **positions** and **Mood (feat. iann dior)**.  I am also guilty of dancing on the most _danceable_ song - **Funky Cold Medina** by _Tone-Loc_ while writing this article. 
+The data and code is freely available [here](https://github.com/alabeli/spotify-eda). Poke around to find answers to your questions around this data. 
 
 Have a lovely day!
