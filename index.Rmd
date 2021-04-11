@@ -35,7 +35,7 @@ The catchphrase **Data is the new currency** has become quite prevalent in our d
 knitr::include_graphics("./imgs/statista-data-consumption.JPG")
 ```
 
-Through groundbreaking inventions in data storage systems, we can find data on almost any subject these days, ranging from the absurd ones (squirrel census in Central Park) to the arcane ones (dermatoscopic images) or even the personal ones (Whatsapp chats/location history). With this kind of data accessibility, we can learn about unfamiliar subjects in unconventional and fascinating medium of data analysis. 
+Through groundbreaking inventions in data storage systems, we can find data on almost any subject these days, ranging from the absurd ones ([squirrel census in Central Park](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw)) to the arcane ones ([dermatoscopic images](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000)) or even the personal ones (Whatsapp chats/location history). With this kind of data accessibility, we can learn about unfamiliar subjects in unconventional and fascinating medium of data analysis. 
 
 Having said that, analyzing data requires understanding the definition of data attributes, the quality of the data, and methodical analysis to not derive incorrect conclusions. Moreover, to avoid getting stuck in the state of _analysis paralysis_, we should have a sense of the questions we would like to answer through the analysis. 
 
